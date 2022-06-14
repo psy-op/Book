@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Book\LibrarySystem.Console.csproj" />
+    <ProjectReference Include="..\LibrarySystem.BL.File\LibrarySystem.BL.File.csproj" />
+    <ProjectReference Include="..\LibrarySystem.BL.Interface\LibrarySystem.BL.Interface.csproj" />
     <ProjectReference Include="..\LibrarySystem.Models\LibrarySystem.Models.csproj" />
   </ItemGroup>
 

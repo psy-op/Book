@@ -1,3 +1,8 @@
+using LibrarySystem.BL.File;
+using LibrarySystem.BL.Interface;
+using LibrarySystem.Models;
+using System.Collections.Generic;
+
 namespace LibrarySystemForm
 {
     internal static class Program
@@ -10,6 +15,8 @@ namespace LibrarySystemForm
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            IBookManager bookmanager = new BookFile();
+            bookmanager.ReadBooks(List < Book > BookList, string path);
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }

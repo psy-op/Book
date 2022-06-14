@@ -9,10 +9,12 @@ namespace LibrarySystem.Models
 {
     public class Book
     {
-        public string Title;
-        public string Author;
-        public int Copies;
-        public int Order;
+        
+
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public int Copies { get; set; }
+        public int Order { get; set; }
         public string RenterName { get; set; }
         public int RenterPhone { get; set; }
         public string SDate { get; set; }
@@ -26,10 +28,5 @@ namespace LibrarySystem.Models
             Copies = copies;
         }
 
-        public static void Rent(List<Book> BookList, List<Info> InfoList,int value)
-        {
-            BookList[value].Copies--;
-            InfoList.Add(new Info(InfoList.Count, BookList[value].RenterName, BookList[value].Title, BookList[value].SDate, BookList[value].EDate, BookList[value].RenterPhone));
-        }      
     }
 }
