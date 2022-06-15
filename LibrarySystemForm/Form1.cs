@@ -89,7 +89,7 @@ namespace LibrarySystemForm
 
             foreach (var info in infomanager.GetList())
             {
-                dataGridView1.Rows.Add(info.ID, info.Name, info.RentedBook, info.SDate, info.EDate);
+                dataGridView1.Rows.Add(infomanager.GetList().IndexOf(info), info.Name, info.RentedBook, info.SDate, info.EDate) ;
             }
             dataGridView1.ClearSelection();
             button2.Enabled = false;
