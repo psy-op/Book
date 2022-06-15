@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -62,7 +62,7 @@ namespace MyApplication
                     if (tdays<=0) { Console.WriteLine("Please enter a valid number of days: "); continue; }
                     DateTime eDate = sDate.AddDays(tdays);
                     BookList[value].EDate = eDate.ToString("d");
-                    Book.Rent(BookList,InfoList,value);
+                    //Book.Rent(BookList,InfoList,value);
                     Console.WriteLine("Book Has been Rented successfully.");
                     errorloop = false;
                 }
@@ -85,7 +85,7 @@ namespace MyApplication
                 }
                 else
                 {
-                    Info.RRent(BookList,InfoList, value);
+                    //Info.RRent(BookList,InfoList, value);
                     Console.WriteLine("Renter Has been removed successfully.");
                     errorloop = false;
                 }
@@ -202,4 +202,3 @@ namespace MyApplication
         }
     }
 }
-*/

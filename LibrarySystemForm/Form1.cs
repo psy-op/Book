@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibrarySystem.Models;
 using LibrarySystem.BL.Interface;
-//using MyApplication;
+
 namespace LibrarySystemForm
 {
     public partial class Form1 : Form
@@ -104,7 +104,7 @@ namespace LibrarySystemForm
         private void Form1_Load(object sender, EventArgs e)
         {        
             button2.Enabled = false;
-            IBookManager.
+            
             ReadInfo2Data();
             ReadBook2Data();
         }
