@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace LibrarySystem.BL.File
 {
-    public class InfoFile : IInfoManager
+    public class InfoManger : IInfoManager
     {
-        public void ReadInfo(List<Info> InfoList, string path)
+        string path = @"C:\Users\faisa\source\repos\xDark911\Book\Book\Renters.csv";
+        List<Info> InfoList = new List<Info>();
+
+        public void ReadInfoToList()
         {
             var linesR = System.IO.File.ReadAllLines(path);
             foreach (string line in linesR)
@@ -21,12 +24,33 @@ namespace LibrarySystem.BL.File
                 InfoList.Add(new Info(Convert.ToInt32(fields[0]), fields[1], fields[2], fields[3], fields[4], Convert.ToInt32(fields[5])));
             }
         }
-        public void RemoveRent(List<Book> BookList, List<Info> InfoList, int value)
+
+        public List<Info> GetList()
         {
-            foreach (var y in BookList) { if (y.Title == InfoList[value].Bookname) { y.Copies++; } }
-            InfoList.RemoveAt(value);
+            return InfoList;
         }
-        public void WriteRent(List<Info> InfoList,int days, string path)
+
+
+
+
+        public void RentBook(string name, string bookname,int phone,int days)
+        {
+            DateTime sDate = DateTime.Now;
+            DateTime eDate = sDate.AddDays(Convert.ToDouble(days));
+
+            InfoList.Add(new Info(InfoList.Count, name, bookname, sDate.ToString("d"), eDate.ToString("d"), phone));
+        }
+
+
+
+
+        public void RemoveRent(int id)
+        {
+            InfoList.RemoveAt(id);
+        }
+
+
+        public void WriteList(int days)
         {
             DateTime sDate = DateTime.Now;
             DateTime eDate = sDate.AddDays(days);
@@ -34,7 +58,7 @@ namespace LibrarySystem.BL.File
             {
                 foreach (var info in InfoList)
                 {
-                    fi.WriteLine(InfoList.IndexOf(info) + "," + info.Name + "," + info.Bookname + "," + info.SDate + "," + info.EDate + "," + info.Phone);
+                    fi.WriteLine(InfoList.IndexOf(info) + "," + info.Name + "," + info.RentedBook + "," + info.SDate + "," + info.EDate + "," + info.Phone);
                 }
             }
         }

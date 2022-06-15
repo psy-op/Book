@@ -8,17 +8,11 @@ using System.Threading.Tasks;
 namespace LibrarySystem.Models
 {
     public class Book
-    {
-        
-
+    {        
         public string Title { get; set; }
         public string Author { get; set; }
         public int Copies { get; set; }
         public int Order { get; set; }
-        public string RenterName { get; set; }
-        public int RenterPhone { get; set; }
-        public string SDate { get; set; }
-        public string EDate { get; set; }
 
         public Book(int order, string title, string author, int copies)
         {

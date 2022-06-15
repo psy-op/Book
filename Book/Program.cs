@@ -52,16 +52,16 @@ namespace MyApplication
                     Console.Write("Please enter your name: ");
                     string uname = Console.ReadLine();
                     if (string.IsNullOrEmpty(uname)){Console.WriteLine("Please enter a valid name: ");continue;}
-                    BookList[value].RenterName = uname;
+                    //BookList[value].RenterName = uname;
                     Console.Write("Please enter your phone: ");
-                    BookList[value].RenterPhone = Convert.ToInt32(Console.ReadLine());
+                    //BookList[value].RenterPhone = Convert.ToInt32(Console.ReadLine());
                     DateTime sDate = DateTime.Now;
-                    BookList[value].SDate = sDate.ToString("d");
+                    //BookList[value].SDate = sDate.ToString("d");
                     Console.Write("Please enter total days for rent: ");
                     double tdays = Convert.ToDouble(Console.ReadLine());
                     if (tdays<=0) { Console.WriteLine("Please enter a valid number of days: "); continue; }
                     DateTime eDate = sDate.AddDays(tdays);
-                    BookList[value].EDate = eDate.ToString("d");
+                    //BookList[value].EDate = eDate.ToString("d");
                     //Book.Rent(BookList,InfoList,value);
                     Console.WriteLine("Book Has been Rented successfully.");
                     errorloop = false;
@@ -107,7 +107,7 @@ namespace MyApplication
             Console.WriteLine("\t Renters\n\n");
             Console.WriteLine("ID" + "  Name " + "\t Book" + "\t  Date ");
             foreach (var info in InfoList)
-            { Console.WriteLine(InfoList.IndexOf(info) + "   " + info.Name + "\t  " + info.Bookname + "\t   " + info.SDate + "\t   " + info.EDate); }
+            { Console.WriteLine(InfoList.IndexOf(info) + "   " + info.Name + "\t  " + info.RentedBook + "\t   " + info.SDate + "\t   " + info.EDate); }
         }
            
         public static void MenuReadBooks(string path, List<Book> BookList)
@@ -147,7 +147,7 @@ namespace MyApplication
             {
                 foreach (var info in InfoList)
                 {
-                    fi.WriteLine(InfoList.IndexOf(info) + "," + info.Name + "," + info.Bookname + "," + info.SDate + "," + info.EDate);
+                    fi.WriteLine(InfoList.IndexOf(info) + "," + info.Name + "," + info.RentedBook + "," + info.SDate + "," + info.EDate);
                 }
             }
         }

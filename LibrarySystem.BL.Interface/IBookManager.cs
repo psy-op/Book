@@ -10,9 +10,18 @@ namespace LibrarySystem.BL.Interface
 {
     public interface IBookManager
     {
-         public void ReadBooks(List<Book> BookList, string path);
-         public void RentBook(List<Book> BookList, List<Info> InfoList, int value);
-         public void WriteBook(List<Book> BookList, string path);
+        public int GetBookIDByName(string bookname);
+
+        public List<Book> GetList();
+
+        public void ReadBookToList();
+
+        public void WriteList();
+
+        public void CopiesDecrement(int id);
+        public void Copiesincrement(int id);
+
+        public string GetBookNameByID(int id);
 
 
     }

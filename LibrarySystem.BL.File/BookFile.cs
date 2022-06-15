@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace LibrarySystem.BL.File
 {
-    public class BookFile : IBookManager
+    public class BookManager : IBookManager
     {
+        string path = @"C:\Users\faisa\source\repos\xDark911\Book\Book\Books.csv";
+        List<Book> BookList = new List<Book>();
 
-        public void ReadBooks(List<Book> BookList, string path)
+        public void ReadBookToList()
         {
                 var linesB = System.IO.File.ReadAllLines(path);
                 foreach (string line in linesB)
@@ -23,15 +25,38 @@ namespace LibrarySystem.BL.File
                 }
         }
 
-
-        public void RentBook(List<Book> BookList, List<Info> InfoList, int value)
+        public List<Book> GetList()
         {
-            BookList[value].Copies--;
-            InfoList.Add(new Info(InfoList.Count, BookList[value].RenterName, BookList[value].Title, BookList[value].SDate, BookList[value].EDate, BookList[value].RenterPhone));
+            return BookList;
         }
 
 
-        public void WriteBook(List<Book> BookList, string path)
+        public int GetBookIDByName(string bookname)
+        {
+            foreach (var book in BookList)
+            {
+                if (bookname == book.Title)
+                {
+                    return book.Order;
+                }    
+            }
+            return -1;
+        }
+
+        public string GetBookNameByID(int id)
+        {
+            foreach (var book in BookList)
+            {
+                if (id == book.Order)
+                {
+                    return book.Title;
+                }
+            }
+            return null;
+        }
+
+
+        public void WriteList()
         {
             using (var fb = new StreamWriter(path))
             {
@@ -42,5 +67,14 @@ namespace LibrarySystem.BL.File
             }
         }
 
+        public void CopiesDecrement(int id)
+        {
+            foreach (var book in BookList) { if (id == book.Order) book.Copies--; }
+        }
+
+        public void Copiesincrement(int id)
+        {
+            foreach (var book in BookList) { if (id == book.Order) book.Copies++; }
+        }
     }
 }

@@ -9,8 +9,16 @@ namespace LibrarySystem.BL.Interface
 {
     public interface IInfoManager
     {
-        public void ReadInfo(List<Info> InfoList, string path);
-        public void RemoveRent(List<Book> BookList, List<Info> InfoList, int value);
-        public void WriteRent(List<Info> InfoList, int days, string path);
+        public void RentBook(string name, string bookname, int phone, int days);
+
+        public List<Info> GetList();
+
+        public void ReadInfoToList();
+
+        public void WriteList(int days);
+
+        public void RemoveRent(int id);
+
+        
     }
 }
