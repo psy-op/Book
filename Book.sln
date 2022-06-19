@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Models", "Lib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Form", "LibrarySystemForm\LibrarySystem.Form.csproj", "{7D0FCE01-48A5-4D8A-BEE9-7F8809D1B2B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.BL.Interface", "LibrarySystem.BL.Interface\LibrarySystem.BL.Interface.csproj", "{33FFA8AC-DA5C-4E37-8D02-79163F065264}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.BL.Interface", "LibrarySystem.BL.Interface\LibrarySystem.BL.Interface.csproj", "{33FFA8AC-DA5C-4E37-8D02-79163F065264}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.BL.File", "LibrarySystem.BL.File\LibrarySystem.BL.File.csproj", "{BB5A1A63-1704-42C5-8EB7-52FA49C42698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.BL.File", "LibrarySystem.BL.File\LibrarySystem.BL.File.csproj", "{BB5A1A63-1704-42C5-8EB7-52FA49C42698}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.BL.SQL", "LibrarySystem.BL.SQL\LibrarySystem.BL.SQL.csproj", "{F579D43C-9DFA-48A7-BFED-A1C79D417E78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BB5A1A63-1704-42C5-8EB7-52FA49C42698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5A1A63-1704-42C5-8EB7-52FA49C42698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5A1A63-1704-42C5-8EB7-52FA49C42698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F579D43C-9DFA-48A7-BFED-A1C79D417E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F579D43C-9DFA-48A7-BFED-A1C79D417E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F579D43C-9DFA-48A7-BFED-A1C79D417E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F579D43C-9DFA-48A7-BFED-A1C79D417E78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Book\LibrarySystem.Console.csproj" />
     <ProjectReference Include="..\LibrarySystem.BL.File\LibrarySystem.BL.File.csproj" />
     <ProjectReference Include="..\LibrarySystem.BL.Interface\LibrarySystem.BL.Interface.csproj" />

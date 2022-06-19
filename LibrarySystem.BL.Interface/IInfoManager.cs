@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace LibrarySystem.BL.Interface
 {
     public interface IInfoManager
     {
-        public void RentBook(string name, string bookname, int phone, int days);
+        public void RentBook(string name, string bookname, int phone, int days, int bookid);
 
         public List<Info> GetList();
 

@@ -33,7 +33,7 @@ namespace LibrarySystem.BL.File
 
 
 
-        public void RentBook(string name, string bookname,int phone,int days)
+        public void RentBook(string name, string bookname,int phone,int days, int bookid)
         {
             DateTime sDate = DateTime.Now;
             DateTime eDate = sDate.AddDays(Convert.ToDouble(days));

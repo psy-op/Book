@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using LibrarySystem.Models;
 using LibrarySystem.BL.Interface;
 using LibrarySystem.BL.File;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace LibrarySystemForm
 {
     public partial class Form1 : Form
     {
+
         IBookManager bookmanager = new BookManager();
         IInfoManager infomanager = new InfoManger();
 
@@ -33,7 +36,7 @@ namespace LibrarySystemForm
             DateTime sDate = DateTime.Now;
             DateTime eDate = sDate.AddDays(Convert.ToDouble(numericUpDown1.Value));
             
-            infomanager.RentBook(textBox1.Text, comboBox1.Text, Convert.ToInt32(textBox2.Text), Convert.ToInt32(numericUpDown1.Value));
+            infomanager.RentBook(textBox1.Text, comboBox1.Text, Convert.ToInt32(textBox2.Text), Convert.ToInt32(numericUpDown1.Value),bookmanager.GetBookIDByName(comboBox1.Text));
             bookmanager.CopiesDecrement(bookmanager.GetBookIDByName(comboBox1.Text));
             dataGridView1.Rows.Add(infomanager.GetList().Count - 1, textBox1.Text, comboBox1.Text, sDate.ToString("d"), eDate.ToString("d"));
             bookmanager.WriteList();
