@@ -13,12 +13,19 @@ namespace LibrarySystem.BL.SQL
     public class InfoSQL : IInfoManager
     {
         List<Info> InfoList = new List<Info>();
-        SqlConnection DB = new SqlConnection(@"Data Source=AHMEDPC\MSSQLSERVER02;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection DB = new SqlConnection(@"Data Source=AHMEDPC\MSSQLSERVER02;Initial Catalog=Library;Integrated Security=True");
 
         public void ReadInfoToList()
         {
-           
-            
+            DB.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Renter", DB);
+            SqlDataReader read = cmd.ExecuteReader();
+            while (read.Read())
+            {
+                InfoList.Add(new Info(Convert.ToInt32(read[0]), read[1].ToString(), read[2].ToString(), read[3].ToString(), read[4].ToString(), Convert.ToInt32(read[5]), Convert.ToInt32(read[6])));
+            }
+            DB.Close();
+
         }
 
         public List<Info> GetList()
@@ -28,31 +35,36 @@ namespace LibrarySystem.BL.SQL
 
 
 
-
         public void RentBook(string name, string bookname, int phone, int days,int bookid)
         {
             DateTime sDate = DateTime.Now;
             DateTime eDate = sDate.AddDays(Convert.ToDouble(days));
+
+            InfoList.Add(new Info(0, name, bookname, sDate.ToString(), eDate.ToString(), phone,bookid));
             DB.Open();
-            SqlCommand cmd = new SqlCommand("Instert into Renter values (@Name,@Book,@StartDate,@EndDate,@PhoneNumber,@BookID",DB);
-            cmd.Parameters.AddWithValue("@Name",name);
-            cmd.Parameters.AddWithValue("@Book", bookname);
-            cmd.Parameters.AddWithValue("@StartDate", sDate);
-            cmd.Parameters.AddWithValue("@EndDate", eDate);
-            cmd.Parameters.AddWithValue("@PhoneNumber", phone);
-            cmd.Parameters.AddWithValue("@BookID", bookid);
-            cmd.ExecuteNonQuery(); 
+            SqlCommand update = new SqlCommand("INSERT INTO Renter values(@Name,@Book,@StartDate,@EndDate,@PhoneNumber,@BookID)", DB);
+            update.Parameters.AddWithValue("@Name",name);
+            update.Parameters.AddWithValue("@Book", bookname);
+            update.Parameters.AddWithValue("@StartDate", sDate);
+            update.Parameters.AddWithValue("@EndDate", eDate);
+            update.Parameters.AddWithValue("@PhoneNumber", phone);
+            update.Parameters.AddWithValue("@BookID", bookid);
+            update.ExecuteNonQuery();
+            DB.Close();
+
         }
 
 
 
 
-        public void RemoveRent(int id)
+        public void RemoveRent(int id, int Index)
         {
             DB.Open();
-            SqlCommand cmd = new SqlCommand("Delete Renter where ID = @ ID", DB);
-            cmd.Parameters.AddWithValue("@ID", id);
-            cmd.ExecuteNonQuery();
+            InfoList.RemoveAt(Index);
+            SqlCommand update = new SqlCommand("Delete Renter where ID=@ID", DB);
+            update.Parameters.AddWithValue("@ID", id);
+            update.ExecuteNonQuery();
+            DB.Close();
         }
 
 

@@ -138,7 +138,7 @@ namespace MyApplication
             {
                 var fields = line.Split(',');
                 if (fields.Length != 5) { Console.WriteLine("Error reading rent data. Application will end to preseve data."); Environment.Exit(0); }
-                InfoList.Add(new Info(Convert.ToInt32(fields[0]), fields[1],fields[2],fields[3],fields[4],Convert.ToInt32(fields[5])));
+                //InfoList.Add(new Info(Convert.ToInt32(fields[0]), fields[1],fields[2],fields[3],fields[4],Convert.ToInt32(fields[5])));
             }
         }
         public static void MenuWriteInfo(string path, List<Info> InfoList)

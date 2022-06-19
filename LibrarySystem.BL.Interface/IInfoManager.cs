@@ -18,7 +18,8 @@ namespace LibrarySystem.BL.Interface
 
         public void WriteList(int days);
 
-        public void RemoveRent(int id);
+        public void RemoveRent(int id,int Index);
+
 
         
     }

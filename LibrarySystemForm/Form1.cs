@@ -9,15 +9,17 @@ using LibrarySystem.BL.Interface;
 using LibrarySystem.BL.File;
 using System.Data.SqlClient;
 using System.Data;
+using LibrarySystem.BL.SQL;
 
 namespace LibrarySystemForm
 {
     public partial class Form1 : Form
     {
 
-        IBookManager bookmanager = new BookManager();
-        IInfoManager infomanager = new InfoManger();
+        IBookManager bookmanager = new BookSQL();
+        IInfoManager infomanager = new InfoSQL();
 
+        int RowID;
         int rowIndex;
         string rowIndexBook;
 
@@ -38,7 +40,9 @@ namespace LibrarySystemForm
             
             infomanager.RentBook(textBox1.Text, comboBox1.Text, Convert.ToInt32(textBox2.Text), Convert.ToInt32(numericUpDown1.Value),bookmanager.GetBookIDByName(comboBox1.Text));
             bookmanager.CopiesDecrement(bookmanager.GetBookIDByName(comboBox1.Text));
-            dataGridView1.Rows.Add(infomanager.GetList().Count - 1, textBox1.Text, comboBox1.Text, sDate.ToString("d"), eDate.ToString("d"));
+            dataGridView1.Rows.Clear();
+            foreach (var info in infomanager.GetList()) { dataGridView1.Rows.Add(info.ID, info.Name, info.RentedBook, info.SDate, info.EDate); }
+            dataGridView1.ClearSelection();
             bookmanager.WriteList();
             infomanager.WriteList(Convert.ToInt32(numericUpDown1.Value));
 
@@ -53,10 +57,7 @@ namespace LibrarySystemForm
             button2.Enabled = false;
             infomanager.ReadInfoToList();
             bookmanager.ReadBookToList();
-            foreach (var book in bookmanager.GetList())
-            {
-                comboBox1.Items.Add(book.Title);
-            }
+            foreach (var book in bookmanager.GetList()){comboBox1.Items.Add(book.Title);}
             foreach(var info in infomanager.GetList()){dataGridView1.Rows.Add(info.ID,info.Name,info.RentedBook,info.SDate,info.EDate);}
         }
 
@@ -72,6 +73,8 @@ namespace LibrarySystemForm
                 button2.Enabled = true;
                 button2.BackColor = Color.Red;
                 rowIndex = dataGridView1.CurrentCell.RowIndex;
+                string IndRow1 = dataGridView1.Rows[rowIndex].Cells["RentID"].FormattedValue.ToString();
+                RowID = Convert.ToInt32(IndRow1);
                 rowIndexBook = dataGridView1.Rows[rowIndex].Cells["NameBook"].FormattedValue.ToString();
             }
             else
@@ -83,18 +86,14 @@ namespace LibrarySystemForm
 
         private void button2_Click(object sender, EventArgs e)
         {            
-            infomanager.RemoveRent(rowIndex);
+            infomanager.RemoveRent(RowID,rowIndex);
             dataGridView1.Rows.RemoveAt(rowIndex);                        
             bookmanager.Copiesincrement(bookmanager.GetBookIDByName(rowIndexBook));
             bookmanager.WriteList();
             infomanager.WriteList(Convert.ToInt32(numericUpDown1.Value));
             dataGridView1.Rows.Clear();
-
-            foreach (var info in infomanager.GetList())
-            {
-                dataGridView1.Rows.Add(infomanager.GetList().IndexOf(info), info.Name, info.RentedBook, info.SDate, info.EDate) ;
-            }
-            dataGridView1.ClearSelection();
+            foreach (var info in infomanager.GetList()) { dataGridView1.Rows.Add(info.ID, info.Name, info.RentedBook, info.SDate, info.EDate); }
+            dataGridView1.ClearSelection();             
             button2.Enabled = false;
             button2.BackColor = Color.Gray;
         }

@@ -15,8 +15,9 @@ namespace LibrarySystem.Models
         public string Name { get; set; }
         public int ID { get; set; }
         public int Phone { get; set; }
+        public int BookID { get; set; }
 
-        public Info(int id,string name, string rentedbook, string sdate, string edate, int phone)
+        public Info(int id,string name, string rentedbook, string sdate, string edate, int phone, int bookid)
         {
             ID = id;
             Name = name;
@@ -24,6 +25,7 @@ namespace LibrarySystem.Models
             EDate = edate;
             RentedBook = rentedbook;
             Phone = phone;
+            BookID = bookid;
         }
 
     }

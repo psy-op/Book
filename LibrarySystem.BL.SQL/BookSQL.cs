@@ -12,7 +12,7 @@ namespace LibrarySystem.BL.SQL
     public class BookSQL : IBookManager
     {
         List<Book> BookList = new List<Book>();
-        SqlConnection DB = new SqlConnection(@"Data Source=AHMEDPC\MSSQLSERVER02;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection DB = new SqlConnection(@"Data Source=AHMEDPC\MSSQLSERVER02;Initial Catalog=Library;Integrated Security=True");
 
 
 
@@ -23,9 +23,9 @@ namespace LibrarySystem.BL.SQL
             SqlDataReader read = cmd.ExecuteReader();
             while (read.Read())
             {
-                BookList.Add(new Book(Convert.ToInt32(read["ID"]), read["Name"].ToString(), read["Author"].ToString(), Convert.ToInt32(read["Copies"])));
+                BookList.Add(new Book(Convert.ToInt32(read[0]), read[1].ToString(), read[2].ToString(), Convert.ToInt32(read[3])));
             }
-
+            DB.Close();
         }
 
         public List<Book> GetList()
@@ -55,23 +55,52 @@ namespace LibrarySystem.BL.SQL
                     return book.Title;
                 }
             }
-            return null; ;
+            return null;
         }
 
 
         public void WriteList()
         {
-
+            
         }
 
         public void CopiesDecrement(int id)
         {
-            foreach (var book in BookList) { if (id == book.Order) book.Copies--; }
+            DB.Open();
+            SqlCommand update = new SqlCommand("Update Book set Copies=@Copies where ID = @ID", DB);
+            int copi;
+            foreach (var book in BookList) 
+            { 
+                if (id == book.Order) 
+                { 
+                    book.Copies--; 
+                    copi = book.Copies;
+                    update.Parameters.AddWithValue("@ID", id);
+                    update.Parameters.AddWithValue("@Copies", copi);
+                    update.ExecuteNonQuery();
+
+                }
+            }
+            DB.Close();          
         }
 
         public void Copiesincrement(int id)
         {
-            foreach (var book in BookList) { if (id == book.Order) book.Copies++; }
+            DB.Open();
+            SqlCommand update = new SqlCommand("Update Book set Copies=@Copies where ID = @ID", DB);
+            int copi;
+            foreach (var book in BookList)
+            {
+                if (id == book.Order)
+                {
+                    book.Copies++;
+                    copi = book.Copies;
+                    update.Parameters.AddWithValue("@ID", id);
+                    update.Parameters.AddWithValue("@Copies", copi);
+                    update.ExecuteNonQuery();
+                    DB.Close();
+                }
+            }
         }
     }
 }

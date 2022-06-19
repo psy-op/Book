@@ -20,8 +20,8 @@ namespace LibrarySystem.BL.File
             foreach (string line in linesR)
             {
                 var fields = line.Split(',');
-                if (fields.Length != 6) { Console.WriteLine("Error reading rent data. Application will end to preseve data."); Environment.Exit(0); }
-                InfoList.Add(new Info(Convert.ToInt32(fields[0]), fields[1], fields[2], fields[3], fields[4], Convert.ToInt32(fields[5])));
+                if (fields.Length != 7) { Console.WriteLine("Error reading rent data. Application will end to preseve data."); Environment.Exit(0); }
+                InfoList.Add(new Info(Convert.ToInt32(fields[0]), fields[1], fields[2], fields[3], fields[4], Convert.ToInt32(fields[5]), Convert.ToInt32(fields[6])));
             }
         }
 
@@ -38,13 +38,13 @@ namespace LibrarySystem.BL.File
             DateTime sDate = DateTime.Now;
             DateTime eDate = sDate.AddDays(Convert.ToDouble(days));
 
-            InfoList.Add(new Info(InfoList.Count, name, bookname, sDate.ToString("d"), eDate.ToString("d"), phone));
+            InfoList.Add(new Info(InfoList.Count, name, bookname, sDate.ToString("d"), eDate.ToString("d"), phone,bookid));
         }
 
 
 
 
-        public void RemoveRent(int id)
+        public void RemoveRent(int id, int Index)
         {
             InfoList.RemoveAt(id);
         }
